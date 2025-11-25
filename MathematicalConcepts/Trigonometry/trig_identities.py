@@ -1010,7 +1010,7 @@ def find_angle_decomposition(angle: float) -> list:
 # PRACTICE PROBLEMS GENERATOR
 # =============================================================================
 
-def generate_practice_problems(n: int = 5, difficulty: str = 'medium') -> list:
+def generate_practice_problems(n: int = 5, difficulty: str = 'medium', seed: int = None) -> list:
     """
     Generate Khan Academy style practice problems.
     
@@ -1022,6 +1022,8 @@ def generate_practice_problems(n: int = 5, difficulty: str = 'medium') -> list:
         'easy' - uses only sin and cos with simple angle sums
         'medium' - includes tan and angle differences  
         'hard' - includes all identities and non-obvious decompositions
+    seed : int, optional
+        Random seed for reproducible results. If None, uses random selection.
     
     Returns:
     --------
@@ -1040,11 +1042,11 @@ def generate_practice_problems(n: int = 5, difficulty: str = 'medium') -> list:
         angles = [75, 105, 15, 165, 195, 255, 285, 345, 7.5, 22.5, 37.5, 52.5, 67.5]
         funcs = ['sin', 'cos', 'tan']
     
-    np.random.seed()
-    selected_angles = np.random.choice(angles, min(n, len(angles)), replace=False)
+    rng = np.random.default_rng(seed)
+    selected_angles = rng.choice(angles, min(n, len(angles)), replace=False)
     
     for angle in selected_angles:
-        func = np.random.choice(funcs)
+        func = rng.choice(funcs)
         expression = f"{func}({int(angle) if angle == int(angle) else angle})"
         
         # Calculate answer

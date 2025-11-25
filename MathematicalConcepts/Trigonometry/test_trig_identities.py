@@ -336,15 +336,7 @@ def run_all_tests():
 
 
 if __name__ == "__main__":
-    # Suppress the print statements from the functions during testing
-    import io
-    from contextlib import redirect_stdout
-    
-    f = io.StringIO()
-    with redirect_stdout(f):
-        success = run_all_tests()
-    
-    # Now print the test results
-    run_all_tests()
+    # Run tests - success status is determined by the test results
+    success = run_all_tests()
     
     exit(0 if success else 1)
